@@ -20,20 +20,32 @@ void osearchid(string orderfile){//поиск заказа по id
 	Order *a = new Order[k+1];//массив из заказов
 	fin.close();
 	fin.open(orderfile);
+	int sido;
+        int sprice;
+        int sdeadline;
+        string saddress;
+        int scourierid;
+        int sdtime;
 	for (i=0; i<k; i++){
-		fin >> a[i].ido;//заносим данные из файла в массив
-		fin >> a[i].price;
-		fin >> a[i].deadline;
-		fin >> a[i].dtime;
-		fin >> a[i].address;
-		fin >> a[i].courierid;
+		fin >> sido;
+		fin >> sprice ;
+		fin >> sdeadline;
+		fin >> sdtime;
+		fin >> saddress;
+		fin >> scourierid;
+		a[i].setido(sido);
+		a[i].setprice(sprice);
+		a[i].setdeadline(sdeadline);
+		a[i].setdtime(sdtime);
+		a[i].setaddress(saddress);
+		a[i].setcourierid(scourierid);
+
 	}
 	int tmp=-1;
-	int ido;
-	cin >>ido;//искомый id
+	cin >>sido;//искомый id
 	for (i=0; i<k; i++){ 
-		if (a[i].ido== ido){//ищем id, выводим, если есть 
-			cout << a[i].ido<<" " <<a[i].price <<" " << a[i].deadline <<" "<< a[i].dtime <<" " << a[i].address<<" " << a[i].courierid <<endl;
+		if (a[i].getido()==sido){//ищем id, выводим, если есть 
+			cout << a[i].getido() <<" "<<a[i].getprice()<<" "<<a[i].getdeadline()<<" "<<a[i].getdtime()<<" "<<a[i].getaddress()<<" "<<a[i].getcourierid()<<endl;
 			tmp=1;		
 		} 
 	}
@@ -43,4 +55,3 @@ void osearchid(string orderfile){//поиск заказа по id
 	fout.close();
 	delete[]a;//уборка
 }
-
