@@ -13,6 +13,7 @@ int main(){
 	int k=0;
 	int l=0;
 	int y=0;
+	int x=0;
 	fstream fin;
 	while (k==0){//считываение имени файла с данными о курьерах 
 		cout << "---------------Please enter new courier database name:(txt file!)- print '0' if you cant---------------"<<endl;
@@ -158,7 +159,8 @@ int main(){
 			}
 		break;
 		case 20://работа с заказами
-			while(l==0){
+			x=0;
+			while(x==0){
 				cout <<"Press 42- to see help"<<endl;
 				oselect(courierfile, orderfile);//распределение заказов
 				cin>>m;
@@ -175,7 +177,7 @@ int main(){
 					cout <<"100- to do to the main menu"<<endl;
 				break;
 				case 100://в главное меню
-					l=1;
+					x=1;
 				break;
 				case 21://добавить заказ
 					addorder(orderfile);
