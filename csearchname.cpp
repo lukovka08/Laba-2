@@ -17,24 +17,37 @@ void csearchname(string courierfile){
 		k++;
 	}
 	k--;
+	int sidc;	
+	string sname;
+	string sphone;
+	int sorderid1;
+	int sorderid2;
+	int scar; 
+	int sdeliverytime;
 	Courier *a = new Courier[k+1];//создаем массив
 	fin.close();
 	fin.open(courierfile);
 	for (i=0; i<k; i++){//заполняем массив из файла
-		fin >> a[i].idc;
-		fin >> a[i].name ;
-		fin >> a[i].phone;
-		fin >> a[i].orderid1;
-		fin >> a[i].orderid2;
-		fin >> a[i].car;
-		fin >> a[i].deliverytime;
+		fin >> sidc;
+		fin >> sname ;
+		fin >> sphone;
+		fin >> sorderid1;
+		fin >> sorderid2;
+		fin >> scar;
+		fin >> sdeliverytime;
+		a[i].setidc(sidc);
+		a[i].setname(sname);
+		a[i].setphone(sphone);
+		a[i].setorderid1(sorderid1);
+		a[i].setorderid2(sorderid2);
+		a[i].setcar(scar);
+		a[i].setdeliverytime(sdeliverytime);
 	}
 	int tmp=-1;
-	string name;
-	cin >>name;//искомое имя
+	cin >>sname;//искомое имя
 	for (i=0; i<k; i++){ 
-		if (a[i].name== name){//ищем совпадения, выводим
-			cout << a[i].idc<<" " <<a[i].name <<" " << a[i].phone <<" " << a[i].orderid1<<" " << a[i].orderid2 <<" "<<a[i].car<<" "<<a[i].deliverytime<<endl;
+		if (a[i].getname()== sname){//ищем совпадения, выводим
+			fout << a[i].getidc() <<" "<<a[i].getname()<<" "<<a[i].getphone()<<" "<<a[i].getorderid1()<<" "<<a[i].getorderid2()<<" "<<a[i].getcar()<<" "<<a[i].getdeliverytime()<<endl;
 			tmp=1;		
 		} 
 	}
@@ -44,4 +57,3 @@ void csearchname(string courierfile){
 	fout.close();
 	delete[]a;//уборка
 }
-
