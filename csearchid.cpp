@@ -17,24 +17,37 @@ void csearchid(string courierfile){
 		k++;
 	}
 	k--;
+	int sidc;	
+	string sname;
+	string sphone;
+	int sorderid1;
+	int sorderid2;
+	int scar; 
+	int sdeliverytime;
 	Courier *a = new Courier[k+1];//массив курьеров на этот количество
 	fin.close();
 	fin.open(courierfile);
 	for (i=0; i<k; i++){
-		fin >> a[i].idc;//заполняем из файла массив
-		fin >> a[i].name ;
-		fin >> a[i].phone;
-		fin >> a[i].orderid1;
-		fin >> a[i].orderid2;
-		fin >> a[i].car;
-		fin >> a[i].deliverytime;
+		fin >> sidc;
+		fin >> sname ;
+		fin >> sphone;
+		fin >> sorderid1;
+		fin >> sorderid2;
+		fin >> scar;
+		fin >> sdeliverytime;
+		a[i].setidc(sidc);
+		a[i].setname(sname);
+		a[i].setphone(sphone);
+		a[i].setorderid1(sorderid1);
+		a[i].setorderid2(sorderid2);
+		a[i].setcar(scar);
+		a[i].setdeliverytime(sdeliverytime);
 	}
 	int tmp=-1;
-	int idc;
-	cin >>idc;//спрашиваем искомый id
+	cin >>sidc;//спрашиваем искомый id
 	for (i=0; i<k; i++){ 
-		if (a[i].idc== idc){//выводим данные такого курьера
-			cout << a[i].idc<<" " <<a[i].name <<" " << a[i].phone <<" " << a[i].orderid1<<" " << a[i].orderid2 <<" " << a[i].car<<" " << a[i].deliverytime<<endl;
+		if (a[i].getidc()== sidc){//выводим данные такого курьера
+			cout << a[i].getidc() <<" "<<a[i].getname()<<" "<<a[i].getphone()<<" "<<a[i].getorderid1()<<" "<<a[i].getorderid2()<<" "<<a[i].getcar()<<" "<<a[i].getdeliverytime()<<endl;
 			tmp=1;		
 		} 
 	}
@@ -44,4 +57,3 @@ void csearchid(string courierfile){
 	fout.close();
 	delete[]a;
 }
-
