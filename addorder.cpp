@@ -19,51 +19,58 @@ void addorder (string orderfile){
 	k--;
 	Order*a = new Order[k+1];//выделяем память
 	fin.close();
+	int sido;
+        int sprice;
+        int sdeadline;
+        string saddress;
+        int scourierid;
+        int sdtime;
 	fin.open(orderfile);	
 	for (i=0; i<k; i++){//считываем из файла данные в массив 
-		fin >> a[i].ido;
-		fin >> a[i].price ;
-		fin >> a[i].deadline;
-		fin >> a[i].dtime;
-		fin >> a[i].address;
-		fin >> a[i].courierid;
+		fin >> sido;
+		fin >> sprice ;
+		fin >> sdeadline;
+		fin >> sdtime;
+		fin >> saddress;
+		fin >> scourierid;
+		a[i].setido(sido);
+		a[i].setprice(sprice);
+		a[i].setdeadline(sdeadline);
+		a[i].setdtime(sdtime);
+		a[i].setaddress(saddress);
+		a[i].setcourierid(scourierid);
 	}
-	int j, l;
-	int ido;
-	l=0;
-	int price;
-	int deadline, dtime;
-	string address;
-	int courierid=0;		
+	int j, l=0;
+	
 	while(l==0){
 		l=1;
-		cin >>price>>deadline>> address;//спрашиваем данные о добавляемом заказе, остальные данные присваиваем автоматически
-		if(deadline<10){
+		cin >>sprice>>sdeadline>>saddress;//спрашиваем данные о добавляемом заказе, остальные данные присваиваем автоматически
+		if(sdeadline<10){
 			cout << "Sorry, we can't deliver your order that fast. Please, try again"<<endl;
 			l=0;
 		}
 	}		
-	ido=k+1;
-	dtime=deadline;
+	sido=k+1;
+	sdtime=sdeadline;
 	while(l==0){//проверка на совпадение id
 		l=1;
 		for(j=0;j<k;j++){
-			if (a[j].ido==ido){
-				ido=ido+1;
+			if (a[j].getido()==sido){
+				sido=sido+1;
 				l=0;
 			}
 		}
 	}					
 	fin.close();
-	a[k].ido=ido;//последнему объекту массива присваиваем ссчитанные данные
-	a[k].price=price;
-	a[k].deadline=deadline;
-	a[k].dtime=dtime;
-	a[k].address=address;
-	a[k].courierid=courierid;
+	a[k].setido(sido);
+	a[k].setprice(sprice);	
+	a[k].setdeadline(sdeadline);
+	a[k].setdtime(sdtime);
+	a[k].setaddress(saddress);
+	a[k].setcourierid(0);
 	fout.open(orderfile, ios::out);
 	for (i=0; i<k+1; i++){//перезаписываем в файл массив
-		fout << a[i].ido <<" "<<a[i].price<<" "<<a[i].deadline<<" "<<a[i].dtime<<" "<<a[i].address<<" "<<a[i].courierid<<endl;
+		fout << a[i].getido() <<" "<<a[i].getprice()<<" "<<a[i].getdeadline()<<" "<<a[i].getdtime()<<" "<<a[i].getaddress()<<" "<<a[i].getcourierid()<<endl;
 	}
 	fout.close();
 	delete [] a;//уборка
