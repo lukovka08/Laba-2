@@ -12,11 +12,12 @@ int main(){
 	int n, m;
 	int k=0;
 	int l=0;
+	int y=0;
 	fstream fin;
 	while (k==0){//считываение имени файла с данными о курьерах 
 		cout << "---------------Please enter new courier database name:(txt file!)- print '0' if you cant---------------"<<endl;
 		cin >> s;
-		if (s=="0")//{выход
+		if (s=="0"){//выход
 			cout<<" Thank you, see you later"<<endl; 
 			exit(0);
 		}
@@ -55,21 +56,21 @@ int main(){
 	int g;
 	k=0;
 	while (k==0){//главное меню
-		cout <<"---------------------------------------"<<endl;
-		cout <<"Your courier database name right now is: "<< courierfile<<endl;	
-		cout <<"Your order database name right now is: "<< orderfile<<endl;
 		cout <<"Press 42- to see help"<<endl;
 		cout <<"---------------------------------------"<<endl;
 		cin >> n;
+		y=0;
+		for(y=0;y<25;y++){cout<<endl;}
+		y=0;
 		oselect(courierfile, orderfile);//функция распределения заказов по курьерам, работает автоматически каждую итерацию
 		switch (n){
 		case 42://справка
 			cout <<"---------------Press:---------------"<<endl;	
 			cout <<"0- to start time"<<endl;
-			cout <<"1- to start work with couriers"<<endl;
-			cout <<"2- to start work with orders"<<endl;
-			cout <<"3- to show courier list"<<endl;
-			cout <<"4- to show order list"<<endl;
+			cout <<"1- to show courier list"<<endl;
+			cout <<"2- to show order list"<<endl;
+			cout <<"10- to start work with couriers"<<endl;
+			cout <<"20- to start work with orders"<<endl;
 			cout <<"100- to end up program"<<endl;
 		break;
 		case 0://промотать время вперед на n минут
@@ -79,60 +80,61 @@ int main(){
 			k=1;
 			cout<<"＼(￣▽￣)／ (*¯︶¯*) ＼(＾▽＾)／ Thank you, see you soon＼(￣▽￣)／ (*¯︶¯*) ＼(＾▽＾)／"<<endl; 
 		break;
-		case 3://вывод всех курьеров
+		case 1://вывод всех курьеров
 			allcourierwrite(courierfile);
 		break;
-		case 4://вывод всех заказов
+		case 2://вывод всех заказов
 			allorderwrite(orderfile);
 		break;
-		case 1://работа с курьерами
-			l=0;
-			system("cls");//переход на новую страницу
+		case 10://работа с курьерами
 			while(l==0){//меню раоботы с курьерами
-				cout <<"---------------------------------------"<<endl;
-				cout <<"Your courier database name right now is: "<< courierfile<<endl;	
-				cout <<"Your order database name right now is: "<< orderfile<<endl;
 				cout <<"Press 42- to see help"<<endl;
 				cin>>m;
+				l=0;
+				for(l=0;l<25;l++){cout<<endl;}
+				l=0;
 				oselect(courierfile, orderfile);//распределение заказов по курьерам
 				switch (m){
 				case 42://справка
 					cout <<"---------------Press:---------------"<<endl;	
-					cout <<"1- to add courier"<<endl;
-					cout <<"2- to fire courier"<<endl;
-					cout <<"3- to find courier with id"<<endl;
-					cout <<"4- to find courier by his name"<<endl;
-					cout <<"5- to find courier by his phone"<<endl;
-					cout <<"6- to show courier list"<<endl;
-					cout <<"7- to clear courier list"<<endl;
-					cout <<"99- to change courier database"<<endl;
-					cout <<"0- to return to main menu"<<endl;
+					cout <<"1- to show courier list"<<endl;
+					cout <<"11- to add courier"<<endl;
+					cout <<"12- to fire courier"<<endl;
+					cout <<"13- to find courier with id"<<endl;
+					cout <<"14- to find courier by his name"<<endl;
+					cout <<"15- to find courier by his phone"<<endl;
+					cout <<"18- to clear courier list"<<endl;
+					cout <<"19- to change courier database"<<endl;
+					cout <<"100- to return to main menu"<<endl;
 				break;
-				case 0://выход в главное меню
-					l=1;
-				break;
-				case 1://добавить курьера
-					addcourier(courierfile);
-				break;
-				case 2://удалить курьера
-					courierdeleting(courierfile, orderfile);
-				break;
-				case 3://найти курьера по id
-					csearchid(courierfile);
-				break;
-				case 4://найти по имени
-					csearchname(courierfile);
-				break;
-				case 5://найти по телефону
-					csearchphone(courierfile);
-				break;
-				case 6://вывести список курьеров
+				case 1://вывести список курьеров
 					allcourierwrite(courierfile);
 				break;
-				case 7://очистить список курьеров
+				case 2://вывод всех заказов
+				allorderwrite(orderfile);
+				break;
+				case 100://выход в главное меню
+					l=1;
+				break;
+				case 11://добавить курьера
+					addcourier(courierfile);
+				break;
+				case 12://удалить курьера
+					courierdeleting(courierfile, orderfile);
+				break;
+				case 13://найти курьера по id
+					csearchid(courierfile);
+				break;
+				case 14://найти по имени
+					csearchname(courierfile);
+				break;
+				case 15://найти по телефону
+					csearchphone(courierfile);
+				break;
+				case 18://очистить список курьеров
 					allcourierclear(courierfile, orderfile);
 				break;
-				case 99://смена базы данных курьеров(аналогично первой)
+				case 19://смена базы данных курьеров(аналогично первой)
 					g=0;
 					while (g==0){
 						cout << "---------------Please enter new courier database name:(txt file!)- print '0' if you cant---------------"<<endl;	
@@ -154,40 +156,37 @@ int main(){
 				break;
 				}
 			}
-			system("cls");//переход на новую страницу
 		break;
-		case 2://работа с заказами
-			l=0;
-			system("cls");//новая страница
+		case 20://работа с заказами
 			while(l==0){
-				cout <<"---------------------------------------"<<endl;
-				cout <<"Your courier database name right now is: "<< courierfile<<endl;	
-				cout <<"Your order database name right now is: "<< orderfile<<endl;
 				cout <<"Press 42- to see help"<<endl;
 				oselect(courierfile, orderfile);//распределение заказов
 				cin>>m;
+				l=0;
+				for(l=0;l<25;l++){cout<<endl;}
+				l=0;	
 				switch (m){
 				case 42://справка
-					cout <<"1- to add order"<<endl;
-					cout <<"2- to find order with id"<<endl;
-					cout <<"3- to show order list"<<endl;
-					cout <<"4- to clear order list"<<endl;
-					cout <<"99- to change order database"<<endl;		
-					cout <<"0- to do to the main menu"<<endl;
+					cout <<"21- to add order"<<endl;
+					cout <<"22- to find order with id"<<endl;
+					cout <<"23- to show order list"<<endl;
+					cout <<"24- to clear order list"<<endl;
+					cout <<"29- to change order database"<<endl;		
+					cout <<"100- to do to the main menu"<<endl;
 				break;
-				case 0://в главное меню
+				case 100://в главное меню
 					l=1;
 				break;
-				case 1://добавить заказ
+				case 21://добавить заказ
 					addorder(orderfile);
 				break;
-				case 2://найти по id
+				case 22://найти по id
 					osearchid(orderfile);
 				break;
-				case 3://вывести список заказов
+				case 23://вывести список заказов
 					allorderwrite(orderfile);
 				break;
-				case 4://очистить файл заказов
+				case 24://очистить файл заказов
 					allorderclear(courierfile, orderfile);
 				break;
 				case 99://смена файла(аналогично начальной
@@ -212,7 +211,6 @@ int main(){
 				break;
 				}
 			}
-			system("cls");
 		break;
 		default://неправильный ввод
 			cout<<"You uncorrect data. Please, try again"<<endl;
@@ -221,4 +219,3 @@ int main(){
 	}
 	return 0;
 }
-
