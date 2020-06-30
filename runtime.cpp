@@ -23,17 +23,31 @@ void runtime(string courierfile, string orderfile){//перемотка врем
 		l++;
 	}
 	l--;
+	int sidc;	
+	string sname;
+	string sphone;
+	int sorderid1;
+	int sorderid2;
+	int scar; 
+	int sdeliverytime;
 	fin.close();
 	fin.open(courierfile);
 	Courier *b = new Courier[l+1];
 	for (i=0; i<l; i++){//считываем курьеров
-		fin >> b[i].idc;
-		fin >> b[i].name ;
-		fin >> b[i].phone;
-		fin >> b[i].orderid1;
-		fin >> b[i].orderid2;
-		fin >> b[i].car;
-		fin >> b[i].deliverytime;
+		fin >> sidc;
+		fin >> sname ;
+		fin >> sphone;
+		fin >> sorderid1;
+		fin >> sorderid2;
+		fin >> scar;
+		fin >> sdeliverytime;
+		b[i].setidc(sidc);
+		b[i].setname(sname);
+		b[i].setphone(sphone);
+		b[i].setorderid1(sorderid1);
+		b[i].setorderid2(sorderid2);
+		b[i].setcar(scar);
+		b[i].setdeliverytime(sdeliverytime);
 	}
 	fin.close();
 	fin.open(orderfile);
@@ -43,67 +57,76 @@ void runtime(string courierfile, string orderfile){//перемотка врем
 		k++;
 	}
 	k--;
+	int sido;
+        int sprice;
+        int sdeadline;
+        string saddress;
+        int scourierid;
+        int sdtime;
 	fin.close();
 	fin.open(orderfile);
 	Order *a = new Order[k+1];
 	for (i=0; i<k; i++){//считываем заказы
-		fin >> a[i].ido;
-		fin >> a[i].price;
-		fin >> a[i].deadline;
-		fin >> a[i].dtime;
-		fin >> a[i].address;
-		fin >> a[i].courierid;
+		fin >> sido;
+		fin >> sprice ;
+		fin >> sdeadline;
+		fin >> sdtime;
+		fin >> saddress;
+		fin >> scourierid;
+		a[i].setido(sido);
+		a[i].setprice(sprice);
+		a[i].setdeadline(sdeadline);
+		a[i].setdtime(sdtime);
+		a[i].setaddress(saddress);
+		a[i].setcourierid(scourierid);
 	}
 	fin.close();
 	fout.open(orderfile, ios::out);
 	for (i=0; i<k; i++){ //идем по массиву заказов
-		a[i].dtime=a[i].dtime-1;//уменьшаем дедлайн и время до доставки на минуту
-		a[i].deadline=a[i].deadline-1;
-
-		
-		if (a[i].dtime>=1){//если заказ еще не доставлен, записываем аго в файл
-			fout << a[i].ido <<" "<<a[i].price<<" "<<a[i].deadline<<" "<<a[i].dtime<<" "<<a[i].address<<" "<<a[i].courierid<<endl;
+		a[i].setdtime(a[i].getdtime()-1);//уменьшаем дедлайн и время до доставки на минуту
+		a[i].setdeadline(a[i].getdeadline()-1);
+		if (a[i].getdtime()>=1){//если заказ еще не доставлен, записываем аго в файл
+			fout << a[i].getido() <<" "<<a[i].getprice()<<" "<<a[i].getdeadline()<<" "<<a[i].getdtime()<<" "<<a[i].getaddress()<<" "<<a[i].getcourierid()<<endl;
 		}
 		else{//если заказ доставлен 
-			if(a[i].courierid==0){
-				a[i].deadline=-10;//заказ так и не распределили
+			if(a[i].getcourierid()==0){
+				a[i].setdeadline(-10);//заказ так и не распределили
 			}
 			else{
-				a[i].deadline=-20;//заказ взял курьер и доставил
+				a[i].setdeadline(-20);//заказ взял курьер и доставил
 			}
 		} 
 	}
 	fout.close();
 	fout.open(courierfile, ios::out); 
 	for(j=0;j<l;j++){//идем по массиву курьеров
-		b[j].deliverytime=b[j].deliverytime-1;//уменьшаем время доставки на единицу
-		if (b[j].deliverytime==0){//если только что оно стало нулем, значит сейчас доставлялся заказ
-			b[j].orderid1=b[j].orderid2;//начинает доставлять второй заказ
-			b[j].orderid2=0;//освобождает место для второго заказа
-			if(b[j].orderid1>0){
-				b[j].deliverytime=30-20*b[j].car;//в зависимости от скорости, определяем время доставки
+		b[j].setdeliverytime(b[j].getdeliverytime()-1);//уменьшаем время доставки на единицу
+		if (b[j].getdeliverytime()==0){//если только что оно стало нулем, значит сейчас доставлялся заказ
+			b[j].setorderid1(b[j].getorderid2());//начинает доставлять второй заказ
+			b[j].setorderid2(0);//освобождает место для второго заказа
+			if(b[j].getorderid1()>0){
+				b[j].setdeliverytime(30-20*b[j].getcar());//в зависимости от скорости, определяем время доставки
 			}
 			else{
-				b[j].deliverytime=0;//если нет заказов, время доставки=0 
+				b[j].setdeliverytime(0);//если нет заказов, время доставки=0 
 			}					
 		}
-		if(b[j].deliverytime<0)//держим числа у людей без заказов больше нуля
-		{b[j].deliverytime=0;}
-		fout << b[j].idc<<" " <<b[j].name <<" " << b[j].phone <<" " << b[j].orderid1<<" " << b[j].orderid2 <<" " << b[j].car<<" " << b[j].deliverytime<<endl;	
+		if(b[j].getdeliverytime()<0)//держим числа у людей без заказов больше нуля
+		{b[j].setdeliverytime(0);}
+		fout << b[j].getidc() <<" "<<b[j].getname()<<" "<<b[j].getphone()<<" "<<b[j].getorderid1()<<" "<<b[j].getorderid2()<<" "<<b[j].getcar()<<" "<<b[j].getdeliverytime()<<endl;
  //переписываем данные о курьерах
 	}		
 	cout<<" "<<g+1<<" minutes passed"<<endl;//выводим сообщение о прошедших миутах
 	fout.close();
 	for (i=0; i<k; i++){ //идем по массиву заказов
-		if(a[i].deadline==-10){//если у заказа прошел дадлайн
-			cout<<"----------------ATTENTION: Sorry, order "<<a[i].ido<<" wasn't delivered----------------"<<endl;
+		if(a[i].getdeadline()==-10){//если у заказа прошел дадлайн
+			cout<<"----------------ATTENTION: Sorry, order "<<a[i].getido()<<" wasn't delivered----------------"<<endl;
 		}
-		if(a[i].deadline==-20){//Если заказ был доставлен
-			cout <<"---------------ATTENTION: Order "<<a[i].ido<<" was delivered--------------"<<endl;
+		if(a[i].getdeadline()==-20){//Если заказ был доставлен
+			cout <<"---------------ATTENTION: Order "<<a[i].getido()<<" was delivered--------------"<<endl;
 		} 
 	}
 	delete[]a;//уборка
 	delete[]b;
 	}
 }
-
