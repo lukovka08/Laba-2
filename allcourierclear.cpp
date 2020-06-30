@@ -21,17 +21,31 @@ void allcourierclear(string courierfile, string orderfile){
 	k--;
 	Order *a = new Order[k+1];
 	fin.close();
+	int sido;
+        int sprice;
+        int sdeadline;
+        string saddress;
+        int scourierid;
+        int sdtime;
 	fin.open(orderfile);
 	for (i=0; i<k; i++){
-		fin >> a[i].ido;
-		fin >> a[i].price;
-		fin >> a[i].deadline;
-		fin >> a[i].dtime;
-		fin >> a[i].address;
-		fin >> a[i].courierid;
+		fin >> sido;
+		fin >> sprice ;
+		fin >> sdeadline;
+		fin >> sdtime;
+		fin >> saddress;
+		fin >> scourierid;
+		a[i].setido(sido);
+		a[i].setprice(sprice);
+		a[i].setdeadline(sdeadline);
+		a[i].setdtime(sdtime);
+		a[i].setaddress(saddress);
+		a[i].setcourierid(scourierid);
 	}
+	fin.close();
+	fout.open(orderfile, ios::out);
 	for (i=0; i<k; i++){ 
-		fout << a[i].ido<<" " <<a[i].price <<" " << a[i].deadline <<" "<< a[i].dtime <<" " << a[i].address<<" " << 0 <<endl;
+		fout << a[i].getido() <<" "<<a[i].getprice()<<" "<<a[i].getdeadline()<<" "<<a[i].getdtime()<<" "<<a[i].getaddress()<<" "<<0<<endl;
 	} 
 	fout.close();
 	delete[]a;
