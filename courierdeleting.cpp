@@ -19,26 +19,39 @@ void courierdeleting(string courierfile, string orderfile){//удаление к
 		k++;
 	}
 	k--;
+	int sidc;	
+	string sname;
+	string sphone;
+	int sorderid1;
+	int sorderid2;
+	int scar; 
+	int sdeliverytime;
 	Courier *a = new Courier[k+1];//создаем массив курьеров
 	fin.close();
 	fin.open(courierfile);
 	for (i=0; i<k; i++){
-		fin >> a[i].idc;//считываем в массив данные из файла
-		fin >> a[i].name ;
-		fin >> a[i].phone;
-		fin >> a[i].orderid1;
-		fin >> a[i].orderid2;
-		fin >> a[i].car;
-		fin >> a[i].deliverytime;
+		fin >> sidc;
+		fin >> sname ;
+		fin >> sphone;
+		fin >> sorderid1;
+		fin >> sorderid2;
+		fin >> scar;
+		fin >> sdeliverytime;
+		a[i].setidc(sidc);
+		a[i].setname(sname);
+		a[i].setphone(sphone);
+		a[i].setorderid1(sorderid1);
+		a[i].setorderid2(sorderid2);
+		a[i].setcar(scar);
+		a[i].setdeliverytime(sdeliverytime);
 	}
-	int idc;
 	int tmp=-1;
-	cin >> idc;//считываем удаляемый id
+	cin >> sidc;//считываем удаляемый id
 	for (i=0; i<k; i++){ 
-		if (a[i].idc== idc){
+		if (a[i].getidc()== sidc){
 			tmp=i;
-			x1=a[i].orderid1;//запоминаем номера его заказов
-			x2=a[i].orderid2;
+			x1=a[i].getorderid1();//запоминаем номера его заказов
+			x2=a[i].getorderid2();
 		}
 	}
 	fin.close();	
@@ -46,7 +59,7 @@ void courierdeleting(string courierfile, string orderfile){//удаление к
 		fout.open(courierfile, ios::out);
 		for (i=0; i<k; i++){
 			if(i!=tmp){//всех курьеров не с его id заносим в файл
-				fout << a[i].idc <<" "<<a[i].name<<" "<<a[i].phone<<" "<<a[i].orderid1<<" " << a[i].orderid2<<" "<<a[i].car<<" "<<a[i].deliverytime<<endl;
+				fout << a[i].getidc() <<" "<<a[i].getname()<<" "<<a[i].getphone()<<" "<<a[i].getorderid1()<<" "<<a[i].getorderid2()<<" "<<a[i].getcar()<<" "<<a[i].getdeliverytime()<<endl;
 			}
 		}
 		fout.close();
@@ -62,24 +75,36 @@ void courierdeleting(string courierfile, string orderfile){//удаление к
 		k++;
 	}
 	k--;
-	Order *b = new Order[k+1];//создаем массив заказов
+	int sido;
+        int sprice;
+        int sdeadline;
+        string saddress;
+        int scourierid;
+        int sdtime;
+        Order *b = new Order[k+1];//создаем массив заказов
 	fin.close();
 	fin.open(orderfile);
 	for (i=0; i<k; i++){
-		fin >> b[i].ido;//считываем заказы из файла
-		fin >> b[i].price;
-		fin >> b[i].deadline;
-		fin >> b[i].dtime;
-		fin >> b[i].address;
-		fin >> b[i].courierid;
-		if ((b[i].ido==x1)||(b[i].ido==x1)){//заказы удаленного курьера делаем свободными
-			b[i].courierid=0;
+		fin >> sido;
+		fin >> sprice ;
+		fin >> sdeadline;
+		fin >> sdtime;
+		fin >> saddress;
+		fin >> scourierid;
+		b[i].setido(sido);
+		b[i].setprice(sprice);
+		b[i].setdeadline(sdeadline);
+		b[i].setdtime(sdtime);
+		b[i].setaddress(saddress);
+		b[i].setcourierid(scourierid);
+		if ((b[i].getido()==x1)||(b[i].getido()==x1)){//заказы удаленного курьера делаем свободными
+			b[i].setcourierid(0);
 		}	
 	}
 	fin.close();
 	fout.open(orderfile, ios::out);
 	for (i=0; i<k; i++){ //перезаписываем массив заказов
-		fout << b[i].ido<<" " <<b[i].price <<" " << b[i].deadline <<" " <<b[i].dtime <<" " << b[i].address<<" " << b[i].courierid<<endl;
+		fout << b[i].getido() <<" "<<b[i].getprice()<<" "<<b[i].getdeadline()<<" "<<b[i].getdtime()<<" "<<b[i].getaddress()<<" "<<b[i].getcourierid()<<endl;
 	}
 	fout.close();
 	delete[]b;//уборка
