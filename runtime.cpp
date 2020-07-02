@@ -4,7 +4,7 @@
 #include <string>
 #include "classes.h"
 using namespace std;
-void runtime(string courierfile, string orderfile){//перемотка времени вперед
+void Order::runtime(string courierfile, string orderfile){//перемотка времени вперед
 	ifstream fin;
 	ofstream fout;	
 	int  i=0;
