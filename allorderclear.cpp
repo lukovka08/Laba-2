@@ -4,7 +4,7 @@
 #include <string>
 #include "classes.h"
 using namespace std;
-void allorderclear(string courierfile, string orderfile){
+void Courier::allorderclear(string courierfile, string orderfile){
 	ofstream f;
 	f.open(orderfile, ios::out);//делаем пустым файл с заказами
 	f.close();
