@@ -4,7 +4,7 @@
 #include <string>
 #include "classes.h"
 using namespace std;
-void allcourierwrite(string courierfile){
+void Courier::allcourierwrite(string courierfile){
 	ifstream fin;
 	fin.open(courierfile);//открываем
 	cout<<"Format:"<<endl;
