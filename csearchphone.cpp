@@ -4,7 +4,7 @@
 #include <string>
 #include "classes.h"
 using namespace std;
-void csearchphone(string courierfile){
+void Courier::csearchphone(string courierfile){
 	ifstream fin;
 	ofstream fout;	
 	fin.open(courierfile);	
@@ -57,3 +57,4 @@ void csearchphone(string courierfile){
 	fout.close();
 	delete[]a;
 }
+
