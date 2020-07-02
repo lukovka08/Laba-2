@@ -14,6 +14,8 @@ int main(){
 	int l=0;
 	int y=0;
 	int x=0;
+	Courier cr;
+	Order od;
 	fstream fin;
 	while (k==0){//считываение имени файла с данными о курьерах 
 		cout << "---------------Please enter new courier database name:(txt file!)- print '0' if you cant---------------"<<endl;
@@ -63,7 +65,7 @@ int main(){
 		y=0;
 		for(y=0;y<25;y++){cout<<endl;}
 		y=0;
-		oselect(courierfile, orderfile);//функция распределения заказов по курьерам, работает автоматически каждую итерацию
+		cr.oselect(courierfile, orderfile);//функция распределения заказов по курьерам, работает автоматически каждую итерацию
 		switch (n){
 		case 42://справка
 			cout <<"---------------Press:---------------"<<endl;	
@@ -75,17 +77,17 @@ int main(){
 			cout <<"100- to end up program"<<endl;
 		break;
 		case 0://промотать время вперед на n минут
-			runtime(courierfile, orderfile);
+			od.runtime(courierfile, orderfile);
 		break;
 		case 100://конец программы
 			k=1;
 			cout<<"＼(￣▽￣)／ (*¯︶¯*) ＼(＾▽＾)／ Thank you, see you soon＼(￣▽￣)／ (*¯︶¯*) ＼(＾▽＾)／"<<endl; 
 		break;
 		case 1://вывод всех курьеров
-			allcourierwrite(courierfile);
+			cr.allcourierwrite(courierfile);
 		break;
 		case 2://вывод всех заказов
-			allorderwrite(orderfile);
+			od.allorderwrite(orderfile);
 		break;
 		case 10://работа с курьерами
 			while(l==0){//меню раоботы с курьерами
@@ -94,7 +96,7 @@ int main(){
 				l=0;
 				for(l=0;l<25;l++){cout<<endl;}
 				l=0;
-				oselect(courierfile, orderfile);//распределение заказов по курьерам
+				cr.oselect(courierfile, orderfile);//распределение заказов по курьерам
 				switch (m){
 				case 42://справка
 					cout <<"---------------Press:---------------"<<endl;	
@@ -109,31 +111,30 @@ int main(){
 					cout <<"100- to return to main menu"<<endl;
 				break;
 				case 1://вывести список курьеров
-					allcourierwrite(courierfile);
+					cr.allcourierwrite(courierfile);
 				break;
 				case 2://вывод всех заказов
-				allorderwrite(orderfile);
+					od.allorderwrite(orderfile);
 				break;
 				case 100://выход в главное меню
 					l=1;
 				break;
 				case 11://добавить курьера
-					addcourier(courierfile);
+					cr.addcourier(courierfile);
 				break;
 				case 12://удалить курьера
-					courierdeleting(courierfile, orderfile);
+					cr.courierdeleting(courierfile, orderfile);
 				break;
 				case 13://найти курьера по id
-					csearchid(courierfile);
+					cr.csearchid(courierfile);
 				break;
 				case 14://найти по имени
-					csearchname(courierfile);
+					cr.csearchname(courierfile);
 				break;
 				case 15://найти по телефону
-					csearchphone(courierfile);
+					cr.csearchphone(courierfile);
 				break;
 				case 18://очистить список курьеров
-					allcourierclear(courierfile, orderfile);
 				break;
 				case 19://смена базы данных курьеров(аналогично первой)
 					g=0;
@@ -162,7 +163,7 @@ int main(){
 			x=0;
 			while(x==0){
 				cout <<"Press 42- to see help"<<endl;
-				oselect(courierfile, orderfile);//распределение заказов
+				cr.oselect(courierfile, orderfile);//распределение заказов
 				cin>>m;
 				l=0;
 				for(l=0;l<25;l++){cout<<endl;}
@@ -180,16 +181,16 @@ int main(){
 					x=1;
 				break;
 				case 21://добавить заказ
-					addorder(orderfile);
+					od.addorder(orderfile);
 				break;
 				case 22://найти по id
-					osearchid(orderfile);
+					od.osearchid(orderfile);
 				break;
 				case 23://вывести список заказов
-					allorderwrite(orderfile);
+					od.allorderwrite(orderfile);
 				break;
 				case 24://очистить файл заказов
-					allorderclear(courierfile, orderfile);
+					cr.allorderclear(courierfile, orderfile);
 				break;
 				case 99://смена файла(аналогично начальной
 					g=0;
