@@ -5,7 +5,7 @@
 #include "classes.h"
 using namespace std;
 
-void courierdeleting(string courierfile, string orderfile){//удаление курьера
+void Courier::courierdeleting(string courierfile, string orderfile){//удаление курьера
 	ifstream fin;
 	ofstream fout;	
 	fin.open(courierfile);	
@@ -110,4 +110,3 @@ void courierdeleting(string courierfile, string orderfile){//удаление к
 	delete[]b;//уборка
 
 }
-
