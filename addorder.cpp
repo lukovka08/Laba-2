@@ -4,7 +4,7 @@
 #include <string>
 #include "classes.h"
 using namespace std;
-void addorder (string orderfile){
+void Order::addorder (string orderfile){
 	ifstream fin;
 	ofstream fout;
 	fin.open(orderfile);	
