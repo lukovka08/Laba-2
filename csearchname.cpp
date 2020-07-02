@@ -4,7 +4,7 @@
 #include <string>
 #include "classes.h"
 using namespace std;
-void csearchname(string courierfile){
+void Courier::csearchname(string courierfile){
 	ifstream fin;
 	ofstream fout;	
 	fin.open(courierfile);	
