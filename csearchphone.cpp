@@ -42,7 +42,7 @@ void Courier::csearchphone(string courierfile){
 		a[i].setorderid2(sorderid2);
 		a[i].setcar(scar);
 		a[i].setdeliverytime(sdeliverytime);
-	}
+	 }
 	int tmp=-1;
 	cin >>sphone;
 	for (i=0; i<k; i++){ 
