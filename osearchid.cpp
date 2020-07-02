@@ -4,7 +4,7 @@
 #include <string>
 #include "classes.h"
 using namespace std;
-void osearchid(string orderfile){//поиск заказа по id
+void Order::osearchid(string orderfile){//поиск заказа по id
 	ifstream fin;
 	ofstream fout;	
 	fin.open(orderfile);	
