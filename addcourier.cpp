@@ -15,7 +15,7 @@ void addcourier (string courierfile)
 	string s;
 	cout << "Enter the courier you want to put('name /n phone  /n car(0 or 1)')"<<endl;
 	while (!fin.eof()){ //Считаем количество строк в тексте=количество видов объектов, функция в скобках выдаёт попал ли курсор в конец файла
-		getline(fin, s);
+		getline(fin, s); // считываем по одной строке
 		k++; // увеличивает на единицу
 	}
 	k--; // уменьшает на единицу 
