@@ -3,9 +3,8 @@
 #include <fstream>
 #include <string>
 #include "classes.h"
-
 using namespace std;
-void addcourier (string courierfile)
+void Courier::addcourier (string courierfile)
 {
 	ifstream fin;
 	ofstream fout;
@@ -14,11 +13,11 @@ void addcourier (string courierfile)
 	int k=0;
 	string s;
 	cout << "Enter the courier you want to put('name /n phone  /n car(0 or 1)')"<<endl;
-	while (!fin.eof()){ //Считаем количество строк в тексте=количество видов объектов, функция в скобках выдаёт попал ли курсор в конец файла
-		getline(fin, s); // считываем по одной строке
-		k++; // увеличивает на единицу
+	while (!fin.eof()){
+		getline(fin, s);
+		k++;
 	}
-	k--; // уменьшает на единицу 
+	k--;
 	int sidc;	
 	string sname;
 	string sphone;
@@ -26,7 +25,7 @@ void addcourier (string courierfile)
 	int sorderid2;
 	int scar; 
 	int sdeliverytime;		
-	Courier *a = new Courier[k+1]; //Выделяем память на массив типа  struct(с запасом)
+	Courier *a = new Courier[k+1];
 	fin.close();
 	fin.open(courierfile);	
 	for (i=0; i<k; i++){
@@ -44,7 +43,6 @@ void addcourier (string courierfile)
 		a[i].setorderid2(sorderid2);
 		a[i].setcar(scar);
 		a[i].setdeliverytime(sdeliverytime);
-		//Считываем элементы из файла, заодно выводим на экран все текущие элементы
 	}
 	int j;
 	cin >>sname>>sphone>>scar;
@@ -53,7 +51,7 @@ void addcourier (string courierfile)
 	while(f==0){
 		f=1;
 		for (i=0; i<k; i++){
-			if (a[i].getidc()== sidc){ //Сравниваем параметры 
+			if (a[i].getidc()== sidc){ 
 				f=0;
 				sidc=sidc+1;	
 			}
@@ -69,20 +67,18 @@ void addcourier (string courierfile)
 			}
 		}
 	}
-	fin.close(); //Готовимся полностью очистить файл
+	fin.close();
 	a[k].setidc(sidc);
 	a[k].setname(sname);
 	a[k].setphone(sphone);
 	a[k].setorderid1(0);
 	a[k].setorderid2(0);
 	a[k].setcar(scar);
-	a[k].setdeliverytime(30-scar*20); // время доставки для одного курьера, 10 мин. с машиной, 30 мин. без машины, так как car принимает значение 1, если есть машина, 0 - если нет
-	fout.open(courierfile, ios::out); //Мы снова в файле, но он теперь пустой
-	for (i=0; i<k+1; i++){ //Переписываем весь дополненный массив в документ
+	a[k].setdeliverytime(30-scar*20);
+	fout.open(courierfile, ios::out);
+	for (i=0; i<k+1; i++){
 		fout << a[i].getidc() <<" "<<a[i].getname()<<" "<<a[i].getphone()<<" "<<a[i].getorderid1()<<" "<<a[i].getorderid2()<<" "<<a[i].getcar()<<" "<<a[i].getdeliverytime()<<endl;
 	}
 	fout.close();
-	delete [] a; //Убираем за собой
+	delete [] a;
 }
-
-
