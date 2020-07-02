@@ -46,7 +46,7 @@ void Courier::allcourierclear(string courierfile, string orderfile){
 	fout.open(orderfile, ios::out);
 	for (i=0; i<k; i++){ 
 		fout << a[i].getido() <<" "<<a[i].getprice()<<" "<<a[i].getdeadline()<<" "<<a[i].getdtime()<<" "<<a[i].getaddress()<<" "<<0<<endl;
-	} 
+	 } 
 	fout.close();
 	delete[]a;
 
