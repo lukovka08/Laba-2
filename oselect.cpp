@@ -4,7 +4,7 @@
 #include <string>
 #include "classes.h"
 using namespace std;
-void oselect(string courierfile, string orderfile)
+void Courier::oselect(string courierfile, string orderfile)
 { 
 	ifstream fin;
 	ofstream fout;	
