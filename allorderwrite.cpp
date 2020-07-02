@@ -4,7 +4,7 @@
 #include <string>
 #include "classes.h"
 using namespace std;
-void allorderwrite(string orderfile){//Вывести все элементы на экран
+void Order::allorderwrite(string orderfile){//Вывести все элементы на экран
 	ifstream fin;
 	fin.open(orderfile);
 	string s;
